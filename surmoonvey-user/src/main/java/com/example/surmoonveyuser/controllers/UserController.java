@@ -15,11 +15,14 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-
     @PostMapping
     public Long createUser(@RequestBody UserRequestDto requestDto) {
         return userService.createUser(requestDto);
     }
 
+    @GetMapping(value = "/survey/{surveyId}")
+    public Long getUserBySurvey(@PathVariable Long surveyId){
+        return userService.getUserBySurvey(surveyId);
+    }
 }
 
