@@ -19,7 +19,7 @@ public class ChoiceAnswer {
     @Column(name = "choice_answer_id", nullable = false)
     private Long choiceAnswerId;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question questionId;

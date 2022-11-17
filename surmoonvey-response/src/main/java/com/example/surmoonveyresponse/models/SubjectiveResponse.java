@@ -17,13 +17,13 @@ import javax.persistence.*;
 public class SubjectiveResponse {
 
     @Id  // Primary key
-    @ManyToOne
+    @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question questionId;
 
     @Id  // Primary key
-    @ManyToOne
+    @ManyToOne(targetEntity = Response.class)
     @JoinColumn(name = "response_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Response responseId;

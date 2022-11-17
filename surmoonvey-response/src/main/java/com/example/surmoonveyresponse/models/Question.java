@@ -21,7 +21,7 @@ public class Question {
     @Column(name = "question_id", nullable = false)
     private Long questionId;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Survey.class)
     @JoinColumn(name = "survey_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Survey surveyId;
