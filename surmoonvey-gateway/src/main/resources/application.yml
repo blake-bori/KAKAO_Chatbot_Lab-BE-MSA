@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: surmoonvey-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+#        globalcors로 통해 각 서비스에서 설정해 주었던 cors configuration은 설정하지 않아도 된다
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      routes:
+#        id를 surmoonvey-user 이런식으로 할 땐 안되다가 user로 변경하니깐 된다 이유가 뭐지..?
+        - id: user
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/api/user/**
+        - id: survey-info
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/api/survey-info/**
+        - id: survey
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/api/survey/**
+        - id: response
+          uri: http://localhost:8084/
+          predicates:
+            - Path=/api/response/**
+        - id: statistic
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/api/statistic/**

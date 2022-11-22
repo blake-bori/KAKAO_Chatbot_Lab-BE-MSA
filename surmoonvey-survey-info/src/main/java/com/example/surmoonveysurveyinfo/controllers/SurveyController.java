@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @ResponseBody
-@RequestMapping("/api/survey")
+@RequestMapping("/api/survey-info")
 public class SurveyController {
 
     @Autowired
