@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @ResponseBody
-@RequestMapping("/api/response")
+@RequestMapping("/api/statistic")
 public class StatisticController {
 
     @Autowired
     private final StatisticService statisticService;
 
-    //     설문 ID에 따라 응답 통계 불러오기
-    @GetMapping("/statistic/{surveyId}")
+    // 설문 ID에 따라 응답 통계 불러오기
+    @GetMapping("/{surveyId}")
     public SurveyStatisticDto getSurveyStatistic(@PathVariable Long surveyId) {
         return statisticService.getSurveyStatistic(surveyId);
     }
