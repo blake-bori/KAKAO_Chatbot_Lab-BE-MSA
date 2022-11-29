@@ -1,8 +1,5 @@
 package com.example.surmoonveyuser.services;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import com.example.surmoonveyuser.dto.UserRequestDto;
 import com.example.surmoonveyuser.models.User;
 import com.example.surmoonveyuser.models.Survey;
