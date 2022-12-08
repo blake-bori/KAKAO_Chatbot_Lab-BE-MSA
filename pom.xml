@@ -9,37 +9,29 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>surmoonvey-discovery</artifactId>
+	<artifactId>surmoonvey</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>surmoonvey-discovery</name>
+	<name>surmoonvey</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>pom</packaging>
+	<modules>
+		<module>surmoonvey-gateway</module>
+		<module>surmoonvey-response</module>
+		<module>surmoonvey-statistic</module>
+		<module>surmoonvey-survey</module>
+		<module>surmoonvey-survey-info</module>
+		<module>surmoonvey-user</module>
+	</modules>
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.5</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
