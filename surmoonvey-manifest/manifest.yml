@@ -1,0 +1,232 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-gateway
+  labels:
+    app: surmoonvey-gateway
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-gateway
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-gateway
+    spec:
+      containers:
+        - name: surmoonvey-gateway
+          image: sswon314/surmoonvey-gateway:11
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-user
+  labels:
+    app: surmoonvey-user
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-user
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-user
+    spec:
+      containers:
+        - name: surmoonvey-user
+          image: sswon314/surmoonvey-user:10
+          ports:
+            - containerPort: 8081
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-info
+  labels:
+    app: surmoonvey-info
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-info
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-info
+    spec:
+      containers:
+        - name: surmoonvey-info
+          image: sswon314/surmoonvey-info:12
+          ports:
+            - containerPort: 8082
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-survey
+  labels:
+    app: surmoonvey-survey
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-survey
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-survey
+    spec:
+      containers:
+        - name: surmoonvey-survey
+          image: sswon314/surmoonvey-survey:5
+          ports:
+            - containerPort: 8083
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-response
+  labels:
+    app: surmoonvey-response
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-response
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-response
+    spec:
+      containers:
+        - name: surmoonvey-response
+          image: sswon314/surmoonvey-response:5
+          ports:
+            - containerPort: 8084
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: surmoonvey-statistic
+  labels:
+    app: surmoonvey-statistic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: surmoonvey-statistic
+  template:
+    metadata:
+      labels:
+        app: surmoonvey-statistic
+    spec:
+      containers:
+        - name: surmoonvey-statistic
+          image: sswon314/surmoonvey-statistic:4
+          ports:
+            - containerPort: 8085
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-gateway-svc
+  labels:
+    app: surmoonvey-gateway-svc
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: surmoonvey-gateway
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-user-svc
+  labels:
+    app: surmoonvey-user-svc
+spec:
+  ports:
+    - port: 8081
+      targetPort: 8081
+  selector:
+    app: surmoonvey-user
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-info-svc
+  labels:
+    app: surmoonvey-info-svc
+spec:
+  ports:
+    - port: 8082
+      targetPort: 8082
+  selector:
+    app: surmoonvey-info
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-survey-svc
+  labels:
+    app: surmoonvey-survey-svc
+spec:
+  ports:
+    - port: 8083
+      targetPort: 8083
+  selector:
+    app: surmoonvey-survey
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-response-svc
+  labels:
+    app: surmoonvey-response-svc
+spec:
+  ports:
+    - port: 8084
+      targetPort: 8084
+  selector:
+    app: surmoonvey-response
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: surmoonvey-statistic-svc
+  labels:
+    app: surmoonvey-statistic-svc
+spec:
+  ports:
+    - port: 8085
+      targetPort: 8085
+  selector:
+    app: surmoonvey-statistic

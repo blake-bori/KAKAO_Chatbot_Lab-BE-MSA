@@ -1,0 +1,25 @@
+pipeline {
+  environment {
+     GITLAB_CREDENTIALS = credentials('gitlab')
+  }
+  agent any
+  stages{
+    stage("Prepare") {
+      steps {
+        git branch: 'main', credentialsId: 'gitlab', url: 'http://210.109.61.217:10013/gitlab-instance-512c489f/surmoonvey-manifest.git'
+      }
+    }
+    stage("Update Git") {
+      steps {
+        sh "git config user.email sswon314@naver.com"
+        sh "git config user.name ssown314"
+        sh "cat manifest.yml"
+        sh "sed -i 's+${REPOSITORY}.*+${REPOSITORY}:${DOCKERTAG}+g' manifest.yml"
+        sh "cat manifest.yml"
+        sh "git add ."
+        sh "git commit -m 'Manifest파일 수정: ${REPOSITORY}'"
+        sh "git push http://${GITLAB_CREDENTIALS_USR}:${GITLAB_CREDENTIALS_PSW}@210.109.61.217:10013/gitlab-instance-512c489f/surmoonvey-manifest.git HEAD:main"
+      }
+    }
+  }
+}

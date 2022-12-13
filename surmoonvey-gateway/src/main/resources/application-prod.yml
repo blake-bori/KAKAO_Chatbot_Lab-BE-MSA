@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        #        globalcors로 통해 각 서비스에서 설정해 주었던 cors configuration은 설정하지 않아도 된다
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      routes:
+        #        id를 surmoonvey-user 이런식으로 할 땐 안되다가 user로 변경하니깐 된다 이유가 뭐지..?
+        - id: user
+          uri: http://surmoonvey-user-svc:8081/
+          predicates:
+            - Path=/api/user/**
+        - id: info
+          uri: http://surmoonvey-info-svc:8082/
+          predicates:
+            - Path=/api/survey-info/**
+        - id: survey
+          uri: http://surmoonvey-survey-svc:8083/
+          predicates:
+            - Path=/api/survey/**
+        - id: response
+          uri: http://surmoonvey-response-svc:8084/
+          predicates:
+            - Path=/api/response/**
+        - id: statistic
+          uri: http://surmoonvey-statistic-svc:8085/
+          predicates:
+            - Path=/api/statistic/**
+        - id: analysis
+          uri: http://surmoonvey-analysis-svc:8086/
+          predicates:
+            - Path=/api/analysis/**
